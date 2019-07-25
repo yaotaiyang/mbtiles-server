@@ -16,13 +16,11 @@ app.use(async (ctx, next) => {
 });
 
 // add url-route:
-router.get('/:s/:z',async (ctx,next) =>{
+router.get('/:s/',async (ctx,next) =>{
     if (fs.existsSync('mbtiles/'+ctx.params.s + ".mbtiles")) {
-        let filePath = path.join(__dirname,'mbtiles',ctx.params.s+'.mbtiles');
-        if(ctx.params.z === 'info'){
-            let info = await getInfo(filePath);
-            ctx.response.body = info;
-        }
+      let filePath = path.join(__dirname,'mbtiles',ctx.params.s+'.mbtiles');
+      let info = await getInfo(filePath);
+      ctx.response.body = info;
     }else {
         ctx.response.body = '404';
       }
@@ -30,13 +28,12 @@ router.get('/:s/:z',async (ctx,next) =>{
 router.get('/:s/:z/:x/:y.:t', async (ctx, next) => {
     if (fs.existsSync('mbtiles/'+ctx.params.s + ".mbtiles")) {
         let filePath = path.join(__dirname,'mbtiles',ctx.params.s+'.mbtiles');
-        
-            let tile = await getTile(filePath,ctx.params.x,ctx.params.y,ctx.params.z);
-            if(tile){
-                let header = getContentType(ctx.params.t);
-                ctx.set(header);
-                ctx.response.body = tile;
-            }
+        let tile = await getTile(filePath,ctx.params.x,ctx.params.y,ctx.params.z);
+        if(tile){
+            let header = getContentType(ctx.params.t);
+            ctx.set(header);
+            ctx.response.body = tile;
+        }
 
     }else {
         ctx.response.body = '404';
@@ -44,9 +41,7 @@ router.get('/:s/:z/:x/:y.:t', async (ctx, next) => {
 });
 
 router.get('/', async (ctx, next) => {
-    setTimeout(function(){
-        ctx.body = '<h1>Index</h1>';
-    },100)
+  ctx.body = '<h1>WellCome to mbtile-server</h1>';
 });
 
 // add router middleware:
