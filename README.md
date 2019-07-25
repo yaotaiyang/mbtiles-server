@@ -10,9 +10,9 @@ you can Requests like this:
 
 ```js
 //get tile data
-http://localhost:3000/mbtiles/<mbtiles-name>/3/1/2.pbf
+http://localhost:3000/{{mbtiles-name}}/3/1/2.pbf
 
 //get mbtiles info
-http://localhost:3000/mbtiles/
+http://localhost:3000/{{mbtiles-name}}/
 ```
-<image src='./tile_info.png' width="400"/>
+<image src='./tile_info.png' width="600"/>
